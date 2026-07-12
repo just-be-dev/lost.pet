@@ -31,7 +31,7 @@
 		"@react-google-maps/api": "^2.20.6",
 		"better-auth": "^1.2.7",
 		"mime": "^4.0.7",
-		"rwsdk": "^0.0.89"
+		"rwsdk": "^0.3.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
