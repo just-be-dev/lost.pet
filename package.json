@@ -26,8 +26,8 @@
 		"types": "tsc"
 	},
 	"dependencies": {
-		"@prisma/adapter-d1": "~6.9.0",
-		"@prisma/client": "~6.9.0",
+		"@prisma/adapter-d1": "~6.19.0",
+		"@prisma/client": "~6.19.0",
 		"@react-google-maps/api": "^2.20.6",
 		"better-auth": "^1.2.7",
 		"mime": "^4.0.7",
@@ -39,7 +39,7 @@
 		"@types/node": "^22.15.15",
 		"@types/react": "^19.1.2",
 		"@types/react-dom": "^19.1.2",
-		"prisma": "~6.9.0",
+		"prisma": "~6.19.0",
 		"sharp": "^0.34.1",
 		"tailwindcss": "^4.1.5",
 		"tsx": "^4.19.4",
