@@ -1,0 +1,98 @@
+{
+  "lexicon": 1,
+  "id": "pet.lost.listing",
+  "description": "A public lost.pet listing for a missing pet, found pet, or sighting of a potentially lost pet.",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A public listing that helps people find lost pets, report found pets, or share sightings. Records are public atproto data and may be indexed, rendered, moderated, or redistributed by other services.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["kind", "pet", "location", "observedAt", "createdAt"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "knownValues": [
+              "pet.lost.defs#missingPet",
+              "pet.lost.defs#foundPet",
+              "pet.lost.defs#sighting"
+            ],
+            "description": "Listing type. Known values are token references, and the set is intentionally open for extension."
+          },
+          "status": {
+            "type": "string",
+            "knownValues": [
+              "pet.lost.defs#statusOpen",
+              "pet.lost.defs#statusReunited",
+              "pet.lost.defs#statusResolved"
+            ],
+            "description": "Current listing status. Omitted status should be interpreted as open by clients that need a default."
+          },
+          "pet": {
+            "type": "ref",
+            "ref": "pet.lost.defs#pet"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 1000,
+            "maxGraphemes": 100,
+            "description": "Short human-readable headline for cards and search results."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10000,
+            "maxGraphemes": 1000,
+            "description": "Additional listing details, circumstances, safety notes, or context."
+          },
+          "location": {
+            "type": "ref",
+            "ref": "pet.lost.defs#location"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When the pet was last seen, found, or sighted, as declared by the author."
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Optional time after which clients may hide the listing from active search results unless its status is updated."
+          },
+          "photos": {
+            "type": "array",
+            "maxLength": 8,
+            "description": "Photos of the pet, surroundings, markings, collar, carrier, flyer, or other context.",
+            "items": {
+              "type": "ref",
+              "ref": "pet.lost.defs#photo"
+            }
+          },
+          "contact": {
+            "type": "ref",
+            "ref": "pet.lost.defs#contact"
+          },
+          "labels": {
+            "type": "union",
+            "description": "Self-label values for this listing. This enables atproto moderation and content-warning tooling.",
+            "refs": ["com.atproto.label.defs#selfLabels"]
+          },
+          "langs": {
+            "type": "array",
+            "description": "Human languages used in summary, description, contact instructions, and other free-text fields.",
+            "maxLength": 3,
+            "items": {
+              "type": "string",
+              "format": "language"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Client-declared timestamp when this listing record was created."
+          }
+        }
+      }
+    }
+  }
+}

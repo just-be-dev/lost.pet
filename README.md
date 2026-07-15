@@ -1,46 +1,32 @@
-# Astro Starter Kit: Basics
+# lost.pet
 
-```sh
-bun create astro@latest -- --template basics
-```
+A project to help people find their lost pets.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## AT Protocol lexicons
 
-## 🚀 Project Structure
+This repository defines the public record schema for lost.pet listings:
 
-Inside of your Astro project, you'll see the following folders and files:
+- `pet.lost.listing` in `lexicons/pet/lost/listing.json`
+- shared reusable definitions in `lexicons/pet/lost/defs.json`
+
+The listing record supports missing-pet reports, found-pet reports, and sightings. It includes optional self-labels via `com.atproto.label.defs#selfLabels` so atproto moderation and content-warning tooling can operate on these records.
+
+Use `pet.lost.listing` with TID record keys:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+at://<did>/pet.lost.listing/<tid>
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Commands
 
-## 🧞 Commands
+```sh
+bun install
+bun run validate:lexicons
+bun run build
+```
 
-All commands are run from the root of the project, from a terminal:
+For local development, start Astro in background mode:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```sh
+bun astro dev --background
+```

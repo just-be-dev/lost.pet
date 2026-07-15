@@ -1,0 +1,166 @@
+{
+  "lexicon": 1,
+  "id": "pet.lost.defs",
+  "description": "Shared definitions for lost.pet records.",
+  "defs": {
+    "missingPet": {
+      "type": "token",
+      "description": "A report that a pet is missing and help is requested to find it."
+    },
+    "foundPet": {
+      "type": "token",
+      "description": "A report that a pet has been found and its human is being sought."
+    },
+    "sighting": {
+      "type": "token",
+      "description": "A report that a potentially lost pet was sighted, without the reporter taking custody."
+    },
+    "statusOpen": {
+      "type": "token",
+      "description": "The listing is active and still needs attention."
+    },
+    "statusReunited": {
+      "type": "token",
+      "description": "The pet has been reunited with its human."
+    },
+    "statusResolved": {
+      "type": "token",
+      "description": "The listing no longer needs attention for another reason."
+    },
+    "pet": {
+      "type": "object",
+      "description": "Information describing the animal in a lost.pet listing.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "Pet name, if known."
+        },
+        "species": {
+          "type": "string",
+          "knownValues": ["dog", "cat", "bird", "rabbit", "reptile", "small-mammal", "livestock", "other"],
+          "description": "Species or broad animal type. Values are suggestions, not a closed set."
+        },
+        "breed": {
+          "type": "string",
+          "maxLength": 1000,
+          "maxGraphemes": 100,
+          "description": "Breed or mix, if known."
+        },
+        "colors": {
+          "type": "array",
+          "maxLength": 8,
+          "description": "Visible coat, feather, scale, or marking colors.",
+          "items": {
+            "type": "ref",
+            "ref": "#color"
+          }
+        },
+        "sex": {
+          "type": "string",
+          "knownValues": ["female", "male", "unknown"],
+          "description": "Observed or known sex. Values are suggestions, not a closed set."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000,
+          "maxGraphemes": 1000,
+          "description": "Distinguishing marks, collar, temperament, medical needs, or other identifying details."
+        }
+      }
+    },
+    "color": {
+      "type": "object",
+      "description": "A visible animal color or marking.",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 320,
+          "maxGraphemes": 32
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1000,
+          "maxGraphemes": 100
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "Approximate public location associated with a listing. Coordinates are optional so authors can avoid overexposing sensitive locations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 2000,
+          "maxGraphemes": 200,
+          "description": "Human-readable place, neighborhood, intersection, park, shelter, or landmark."
+        },
+        "latitudeE7": {
+          "type": "integer",
+          "minimum": -900000000,
+          "maximum": 900000000,
+          "description": "Latitude in degrees multiplied by 10,000,000."
+        },
+        "longitudeE7": {
+          "type": "integer",
+          "minimum": -1800000000,
+          "maximum": 1800000000,
+          "description": "Longitude in degrees multiplied by 10,000,000."
+        },
+        "accuracyMeters": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Approximate radius in meters for the public location."
+        },
+        "geohash": {
+          "type": "string",
+          "maxLength": 32,
+          "description": "Optional geohash for coarse geospatial indexing."
+        }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "description": "A photo attached to a listing.",
+      "required": ["image"],
+      "properties": {
+        "image": {
+          "type": "blob",
+          "accept": ["image/*"],
+          "description": "Image blob for the pet or the sighting context."
+        },
+        "alt": {
+          "type": "string",
+          "maxLength": 2000,
+          "maxGraphemes": 200,
+          "description": "Alt text describing the image."
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "description": "Public contact guidance for a listing. Authors should avoid publishing sensitive personal details they do not want redistributed.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "Name or organization to contact."
+        },
+        "instructions": {
+          "type": "string",
+          "maxLength": 3000,
+          "maxGraphemes": 300,
+          "description": "Public instructions for contacting the author, finder, shelter, or caretaker."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional contact, canonical listing, shelter, or organization URL."
+        }
+      }
+    }
+  }
+}
