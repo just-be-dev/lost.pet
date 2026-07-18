@@ -13,7 +13,11 @@
     "validate:lexicons": "node scripts/validate-lexicons.mjs"
   },
   "dependencies": {
-    "astro": "^7.0.9"
+    "@effect/platform-bun": "4.0.0-beta.98",
+    "@effect/platform-node": "4.0.0-beta.98",
+    "alchemy": "^2.0.0-beta.62",
+    "astro": "^7.0.9",
+    "effect": "4.0.0-beta.98"
   },
   "devDependencies": {
     "@atproto/lexicon": "^0.7.7"

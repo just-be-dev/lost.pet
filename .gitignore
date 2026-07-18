@@ -3,6 +3,8 @@ dist/
 
 # generated types
 .astro/
+.alchemy/
+
 
 # dependencies
 node_modules/
